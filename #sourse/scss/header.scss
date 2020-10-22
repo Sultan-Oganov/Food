@@ -1,0 +1,46 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 150px;
+	padding: 0 55px;
+	&__left-block {
+		display: flex;
+		justify-content: space-between;
+		min-width: 550px;
+	}
+	&__logo {
+		max-width: 170px;
+		margin-right: 30px;
+		img {
+			width: 100%;
+		}
+	}
+	&__nav {
+		display: flex;
+		align-items: center;
+	}
+	&__link {
+		position: relative;
+		font-size: 18px;
+		font-weight: 700;
+		margin: 0 45px 0 0;
+		color:#303030;
+		&:after {
+			content: "";
+			position: absolute;
+			display: block;
+			width: 110%;
+			height: 8px;
+			bottom: -1px;
+			left: -5%;
+			background-color: #54ed39;
+			z-index: -1;
+		}
+		&:last-child {
+			margin: 0;
+		}
+	}
+	&__right-block {}
+	&__button {}
+}

@@ -1,0 +1,87 @@
+.calculting {
+	padding: 50px 0;
+	text-align: center;
+	&__title {}
+	&__field {
+		width: 100%;
+		margin-top: 50px;
+		background: rgba(146,242,255,.15);
+		padding: 30px 0 40px 0;
+	}
+	&__subtitle {
+		font-size: 18px;
+		font-weight: 700;
+		margin-top: 30px;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	&__choose {
+		position: relative;
+		display: flex;
+		margin: 30px 0 0 0;
+		justify-content: center;
+		&_medium {
+			width: 743px;
+			justify-content: space-between;
+			margin: 30px auto 0 auto;
+		}
+		&_big {
+			width: 930px;
+			justify-content: space-between;
+			margin: 30px auto 0 auto;
+		}
+	}
+	#gender {
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			display: block;
+			width: 16px;
+			height: 16px;
+			background: url('../img/calc/switch.svg') center center/cover no-repeat;
+		}
+	}
+	&__choose-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 170px;
+		height: 50px;
+		text-align: center;
+		padding: 0 10px;
+		background: #fff;
+		box-shadow: 0 4px 15px rgba(0,0,0,.2);
+		font-size: 14px;
+		cursor: pointer;
+		@include anim(.3s, 0s);
+		&_active {
+			color: #fff;
+			background-color: #54ed39;
+		}
+	}
+	&__divider {
+		width: 490px;
+		height: 1px;
+		margin: 40px auto;
+		background-color: rgba(0,0,0,.2);
+	}
+	&__total {
+		width: 490px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+.calculating {
+	&__result {
+		font-size: 18px;
+		font-weight: 700;
+		span {
+			font-size: 42px;
+		}
+	}
+}

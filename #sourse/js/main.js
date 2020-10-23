@@ -1,6 +1,16 @@
 'use strict';
 
 window.addEventListener('DOMContentLoaded', () =>{
+
+	const burger = document.querySelector('.icon-menu'),
+			menu = document.querySelector('.header__nav');
+	burger.addEventListener('click', () => {
+		burger.classList.toggle('active');
+		menu.classList.toggle('active');
+		document.body.classList.toggle('active');
+
+	});
+
 	//Tabs
 	const tabContent = document.querySelectorAll('.tabcontent'),
 			tabsParent = document.querySelector('.tabheader__items'),

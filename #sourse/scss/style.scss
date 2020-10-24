@@ -17,7 +17,7 @@ $fontfamily: "Roboto";
 @import "null.scss";
 
 body{
-	&.active {
+	&.lock {
 		overflow: hidden;
 	}
 }
@@ -47,6 +47,7 @@ body{
 @import "menu.scss";
 @import "order.scss";
 @import "promotion.scss";
+@import "modal.scss";
 @import "footer.scss";
 //ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ=================================================================
 
@@ -66,6 +67,13 @@ body{
 .title {
 	font-size: 36px;
 	font-weight: 400;
+}
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
 }
 .btn {
 	font-size: 18px;
@@ -87,6 +95,9 @@ body{
 	&_dark {
 		color: #fff;
 		background-color: #303030;
+	}
+	&_min {
+		height: 50px !important;
 	}
 	&:hover {
 		box-shadow: 0 4px 30px #aaadab;

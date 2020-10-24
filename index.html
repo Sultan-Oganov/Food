@@ -34,7 +34,7 @@
 					</nav>
 				</div>
 				<div class="header__right-block">
-					<div class="header__button btn btn_white">Связаться с нами</div>
+					<button data-modal class="header__button btn btn_white">Связаться с нами</button>
 				</div>
 			</header>			<div class="content">
 				<section class="side__social social">
@@ -106,7 +106,7 @@
 								<p>Наша основная идея - это правильное питание. Оно может быть простым и вкусным. Мы не просто доставка, мы сервис! Мы взяли на себя все расчеты БЖУ, калорийности, объемов порций и прочие важные, но скучные аспекты. Вам остается только полезная, сытная и правильная еда, которую мы привозим прямо под дверь.</p>
 							</div>
 							<div class="head-block__action">
-								<div class="head-block__btn btn btn_dark">Связаться с нами</div>
+								<button data-modal class="head-block__btn btn btn_dark">Связаться с нами</button>
 							</div>
 						</div>
 						<div class="advice__row">
@@ -248,8 +248,8 @@
 					<div class="container">
 						<div class="order__title title">Заказывай пробный день прямо сейчас!</div>
 						<form action="#" class="order__form">
-							<input type="text" class="order__input" placeholder="Ваше имя" name="name" value="">
-							<input type="tel" class="order__input" placeholder="Ваш номер телефона" name="phone" value="">
+							<input type="text" class="order__input" required="" placeholder="Ваше имя" name="name" value="">
+							<input type="tel" class="order__input" required="" placeholder="Ваш номер телефона" name="phone" value="">
 							<img src="img/advice/slider/arrow/right.svg" alt="">
 							<button class="btn btn_dark btn_min">Перезвонить мне</button>
 						</form>
@@ -284,7 +284,19 @@
 						</div>
 					</div>
 				</section>
-			</div>
+				<div class="modal">
+					<div class="modal__dialog">
+						<div class="modal__content">
+							<form action="#" class="modal__form">
+								<div data-close class="modal__close">&times;</div>
+								<div class="modal__title">Мы свяжемся с вами как можно быстрее!</div>
+								<input type="text" required="" placeholder="Ваше имя" name="name"value="" class="modal__input">
+								<input type="phone" required="" placeholder="Ваше номер телефона" name="phone" value="" class="modal__input">
+								<button class="modal__btn btn btn_dark btn_min">Перезвонить мне</button>
+							</form>
+						</div>
+					</div>
+				</div>			</div>
 			<footer class="footer">
 				<div class="container">
 					<div class="footer__social">

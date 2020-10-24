@@ -1,12 +1,14 @@
 'use strict';
 
 window.addEventListener('DOMContentLoaded', () => {
+  //Menu
   const burger = document.querySelector('.icon-menu'),
-        menu = document.querySelector('.header__nav');
+        menu = document.querySelector('.header__nav'),
+        body = document.querySelector('body');
   burger.addEventListener('click', () => {
     burger.classList.toggle('active');
     menu.classList.toggle('active');
-    document.body.classList.toggle('active');
+    body.classList.toggle('lock');
   }); //Tabs
 
   const tabContent = document.querySelectorAll('.tabcontent'),
@@ -91,5 +93,47 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setClock('.timer__blocks', deadLine);
+  setClock('.timer__blocks', deadLine); //Modal Window
+
+  const modalTrigger = document.querySelectorAll('[data-modal]'),
+        modalClose = document.querySelector('[data-close]'),
+        modal = document.querySelector('.modal');
+
+  function openModal() {
+    modal.classList.add('show');
+    modal.classList.remove('hide');
+    body.classList.add('lock');
+  }
+
+  function closeModal() {
+    modal.classList.add('hide');
+    modal.classList.remove('show');
+    body.classList.remove('lock');
+    clearInterval(modalTimerId);
+  }
+
+  modalTrigger.forEach(trigger => {
+    trigger.addEventListener('click', openModal);
+  });
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
+  const modalTimerId = setTimeout(openModal, 5000);
+
+  function showModalByScroll() {
+    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      openModal();
+      window.removeEventListener('scroll', showModalByScroll);
+    }
+  }
+
+  window.addEventListener('scroll', showModalByScroll);
 });

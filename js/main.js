@@ -137,12 +137,13 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', showModalByScroll); //Use Class for Cards
 
   class MenuCard {
-    constructor(src, alt, title, descr, price, parentSelector) {
+    constructor(src, alt, title, descr, price, parentSelector, ...classes) {
       this.src = src;
       this.alt = alt;
       this.title = title;
       this.descr = descr;
       this.price = price;
+      this.classes = classes;
       this.parent = document.querySelector(parentSelector);
       this.transfer = 0.85;
       this.changeToEUR();
@@ -154,13 +155,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     render() {
       const element = document.createElement('div');
-      element.innerHTML = "\n\t\t\t\t<div class=\"menu__column\">\n\t\t\t\t\t<div class=\"menu__column-img\">\n\t\t\t\t\t\t<img src=".concat(this.src, " alt=", "this.alt", ">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"menu__subtitle\">").concat(this.title, "</div>\n\t\t\t\t\t<div class=\"menu__column-descr\">").concat(this.descr, "</div>\n\t\t\t\t\t<div class=\"menu__column-divider\"></div>\n\t\t\t\t\t<div class=\"menu__column-price\">\n\t\t\t\t\t\t<div class=\"menu__column-cost\">\u0426\u0435\u043D\u0430:</div>\n\t\t\t\t\t\t<div class=\"menu__column-total\"><span>").concat(this.price, "</span> &euro;/\u0434\u0435\u043D\u044C</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
+
+      if (this.classes.length === 0) {
+        this.element = 'menu__column';
+        element.classList.add(this.element);
+      } else {
+        this.classes.forEach(className => element.classList.add(className));
+      }
+
+      element.innerHTML = "\n\t\t\t\t<div class=\"menu__column-img\">\n\t\t\t\t\t<img src=".concat(this.src, " alt=").concat(this.alt, ">\n\t\t\t\t</div>\n\t\t\t\t<div class=\"menu__subtitle\">").concat(this.title, "</div>\n\t\t\t\t<div class=\"menu__column-descr\">").concat(this.descr, "</div>\n\t\t\t\t<div class=\"menu__column-divider\"></div>\n\t\t\t\t<div class=\"menu__column-price\">\n\t\t\t\t\t<div class=\"menu__column-cost\">\u0426\u0435\u043D\u0430:</div>\n\t\t\t\t\t<div class=\"menu__column-total\"><span>").concat(this.price, "</span> &euro;/\u0434\u0435\u043D\u044C</div>\n\t\t\t\t</div>\n\t\t\t");
       this.parent.append(element);
     }
 
   }
 
-  new MenuCard("img/dishes/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 30, '.menu .menu__row').render();
-  new MenuCard("img/dishes/elite.jpg", "elite", 'Меню "Премиум"', 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 76.90, '.menu .menu__row').render();
-  new MenuCard("img/dishes/post.jpg", "post", 'Меню "Постное"', 'Меню "Постное" - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 35.50, '.menu .menu__row').render();
+  new MenuCard("img/dishes/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 30, '.menu .menu__row', 'menu__column', 'big').render();
+  new MenuCard("img/dishes/elite.jpg", "elite", 'Меню "Премиум"', 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 76.90, '.menu .menu__row', 'menu__column').render();
+  new MenuCard("img/dishes/post.jpg", "post", 'Меню "Постное"', 'Меню "Постное" - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 35.50, '.menu .menu__row', 'menu__column').render();
 });

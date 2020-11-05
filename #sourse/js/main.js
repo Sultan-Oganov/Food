@@ -105,7 +105,6 @@ window.addEventListener('DOMContentLoaded', () =>{
 	setClock('.timer__blocks', deadLine);
 
 	//Modal Window
-
 	const modalTrigger = document.querySelectorAll('[data-modal]'),
 			modal = document.querySelector('.modal');
 
@@ -119,7 +118,6 @@ window.addEventListener('DOMContentLoaded', () =>{
 		modal.classList.add('hide');
 		modal.classList.remove('show');
 		body.classList.remove('lock');
-		clearInterval(modalTimerId);
 	}
 
 	modalTrigger.forEach(trigger => {
@@ -150,7 +148,6 @@ window.addEventListener('DOMContentLoaded', () =>{
 	window.addEventListener('scroll', showModalByScroll);
 
 	//Use Class for Cards
-
 	class MenuCard {
 		constructor(src, alt, title, descr, price, parentSelector, ...classes) {
 			this.src = src;
@@ -270,6 +267,9 @@ window.addEventListener('DOMContentLoaded', () =>{
 					statusMessage.remove();
 				} else {
 					showThanksModal(message.failure);
+					setTimeout(() => {
+						statusMessage.remove();
+					}, 2000);
 				}
 			});
 		});
@@ -277,7 +277,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 	function showThanksModal(message) {
 		const prevModalDialog = document.querySelector('.modal__dialog');
-
+		prevModalDialog.classList.remove('show');
 		prevModalDialog.classList.add('hide');
 		openModal();
 
@@ -296,6 +296,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 			prevModalDialog.classList.add('show');
 			prevModalDialog.classList.remove('hide');
 			closeModal();
-		},4000);
+		}, 4000);
 	}
+
 });

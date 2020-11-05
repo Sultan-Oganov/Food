@@ -1,1 +1,302 @@
-"use strict";window.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".icon-menu"),t=document.querySelector(".header__nav"),s=document.querySelector("body");e.addEventListener("click",()=>{e.classList.toggle("active"),t.classList.toggle("active"),s.classList.toggle("lock")});const n=document.querySelectorAll(".tabcontent"),c=document.querySelector(".tabheader__items"),o=document.querySelectorAll(".tabheader__item");function i(){n.forEach(e=>{e.classList.add("hide"),e.classList.remove("show","fade")}),o.forEach(e=>{e.classList.remove("tabheader__item_active")})}function a(e=0){n[e].classList.add("show","fade"),n[e].classList.remove("hide"),o[e].classList.add("tabheader__item_active")}i(),a(),c.addEventListener("click",e=>{const t=e.target;t&&t.classList.contains("tabheader__item")&&o.forEach((e,s)=>{t==e&&(i(),a(s))})});function r(e){return e>=0&&e<10?"0".concat(e):e}!function(e,t){const s=document.querySelector(e),n=s.querySelector("#days"),c=s.querySelector("#hours"),o=s.querySelector("#minutes"),i=s.querySelector("#seconds"),a=setInterval(d,1e3);function d(){const e=function(e){const t=Date.parse(e)-Date.parse(new Date);return{total:t,days:Math.floor(t/864e5),hours:Math.floor(t/36e5%24),minutes:Math.floor(t/1e3/60%60),seconds:Math.floor(t/1e3%60)}}(t);n.innerHTML=r(e.days),c.innerHTML=r(e.hours),o.innerHTML=r(e.minutes),i.innerHTML=r(e.seconds),e.total<=0&&clearInterval(a)}d()}(".timer__blocks","2021-01-01");const d=document.querySelectorAll("[data-modal]"),l=document.querySelector(".modal");function m(){l.classList.add("show"),l.classList.remove("hide"),s.classList.add("lock")}function u(){l.classList.add("hide"),l.classList.remove("show"),s.classList.remove("lock"),clearInterval(h)}d.forEach(e=>{e.addEventListener("click",m)}),l.addEventListener("click",e=>{e.target!==l&&""!=e.target.getAttribute("data-close")||u()}),document.addEventListener("keydown",e=>{"Escape"===e.code&&l.classList.contains("show")&&u()});const h=setTimeout(m,5e4);window.addEventListener("scroll",(function e(){window.pageYOffset+document.documentElement.clientHeight>=document.documentElement.scrollHeight&&(m(),window.removeEventListener("scroll",e))}));class v{constructor(e,t,s,n,c,o,...i){this.src=e,this.alt=t,this.title=s,this.descr=n,this.price=c,this.classes=i,this.parent=document.querySelector(o),this.transfer=.85,this.changeToEUR()}changeToEUR(){this.price=Math.trunc(this.price*this.transfer)}render(){const e=document.createElement("div");0===this.classes.length?(this.element="menu__column",e.classList.add(this.element)):this.classes.forEach(t=>e.classList.add(t)),e.innerHTML='\n\t\t\t\t<div class="menu__column-img">\n\t\t\t\t\t<img src='.concat(this.src," alt=").concat(this.alt,'>\n\t\t\t\t</div>\n\t\t\t\t<div class="menu__subtitle">').concat(this.title,'</div>\n\t\t\t\t<div class="menu__column-descr">').concat(this.descr,'</div>\n\t\t\t\t<div class="menu__column-divider"></div>\n\t\t\t\t<div class="menu__column-price">\n\t\t\t\t\t<div class="menu__column-cost">Цена:</div>\n\t\t\t\t\t<div class="menu__column-total"><span>').concat(this.price,"</span> &euro;/день</div>\n\t\t\t\t</div>\n\t\t\t"),this.parent.append(e)}}new v("img/dishes/vegy.jpg","vegy",'Меню "Фитнес"','Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',30,".menu .menu__row","menu__column","big").render(),new v("img/dishes/elite.jpg","elite",'Меню "Премиум"',"В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",76.9,".menu .menu__row","menu__column").render(),new v("img/dishes/post.jpg","post",'Меню "Постное"','Меню "Постное" - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',35.5,".menu .menu__row","menu__column").render();const _=document.querySelectorAll("form"),L="img/form/spiner.svg",g="Спасибо! Скоро мы с вами свяжемся",p="Что-то пошло не так...";function f(e){const t=document.querySelector(".modal__dialog");t.classList.add("hide"),m();const s=document.createElement("div");s.classList.add("modal__dialog"),s.innerHTML='\n\t\t\t<div class="modal__content">\n\t\t\t\t<div class="modal__close" data-close>×</div>\n\t\t\t\t<div class="modal__title">'.concat(e,"</div>\n\t\t\t</div>\n\t\t"),document.querySelector(".modal").append(s),setTimeout(()=>{s.remove(),t.classList.add("show"),t.classList.remove("hide"),u()},4e3)}_.forEach(e=>{var t;(t=e).addEventListener("submit",e=>{e.preventDefault();const s=document.createElement("img");s.src=L,s.classList.add("spiner"),t.insertAdjacentElement("afterend",s);const n=new XMLHttpRequest;n.open("POST","server.php"),n.setRequestHeader("Content-type","application/json");const c=new FormData(t),o={};c.forEach((e,t)=>{o[t]=e});const i=JSON.stringify(o);n.send(i),n.addEventListener("load",()=>{200===n.status?(console.log(n.response),f(g),t.reset(),s.remove()):f(p)})})})});
+'use strict';
+
+window.addEventListener('DOMContentLoaded', () =>{
+
+	//Menu
+	const burger = document.querySelector('.icon-menu'),
+			menu = document.querySelector('.header__nav'),
+			body = document.querySelector('body');
+
+	burger.addEventListener('click', () => {
+		burger.classList.toggle('active');
+		menu.classList.toggle('active');
+		body.classList.toggle('lock');
+	});
+
+	//Tabs
+	const tabContent = document.querySelectorAll('.tabcontent'),
+			tabsParent = document.querySelector('.tabheader__items'),
+			tabs = document.querySelectorAll('.tabheader__item');
+
+	function hideContent(){
+		tabContent.forEach(item => {
+			item.classList.add('hide');
+			item.classList.remove('show', 'fade');
+		});
+
+		tabs.forEach(item => {
+			item.classList.remove('tabheader__item_active');
+		});
+	}
+
+	function showContent(i = 0) {
+		tabContent[i].classList.add('show', 'fade');
+		tabContent[i].classList.remove('hide');
+
+		tabs[i].classList.add('tabheader__item_active');
+	}
+
+	hideContent();
+	showContent();
+
+	tabsParent.addEventListener('click', event => {
+		const target = event.target;
+
+		if (target && target.classList.contains('tabheader__item')) {
+			tabs.forEach((tab, i) => {
+				if (target == tab) {
+					hideContent();
+					showContent(i);
+				}
+			});
+		}
+	});
+
+	//Timer
+	const deadLine = '2021-01-01';
+
+	function getTimeRemaining(endtime) {
+		const t = Date.parse(endtime) - Date.parse(new Date()),
+				days = Math.floor(t / (1000 * 60 * 60 * 24)),
+				hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+				minutes = Math.floor((t / 1000 / 60) % 60),
+				seconds = Math.floor((t / 1000) % 60);
+
+		return {
+			total: t,
+			days: days,
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds
+		};
+	}
+
+	function getZero(num) {
+		if (num >= 0 && num < 10) {
+			return `0${num}`;
+		} else {
+			return num;
+		}
+	}
+
+	function setClock(selector, endtime) {
+		const timer = document.querySelector(selector),
+				days = timer.querySelector('#days'),
+				hours = timer.querySelector('#hours'),
+				minutes = timer.querySelector('#minutes'),
+				seconds = timer.querySelector('#seconds'),
+				timeInterval = setInterval(updateClock, 1000);
+
+		updateClock();
+
+		function updateClock() {
+			const t = getTimeRemaining(endtime);
+
+			days.innerHTML = getZero(t.days);
+			hours.innerHTML = getZero(t.hours);
+			minutes.innerHTML = getZero(t.minutes);
+			seconds.innerHTML = getZero(t.seconds);
+
+			if (t.total <= 0) {
+				clearInterval(timeInterval);
+			}
+		}
+	}
+	setClock('.timer__blocks', deadLine);
+
+	//Modal Window
+	const modalTrigger = document.querySelectorAll('[data-modal]'),
+			modal = document.querySelector('.modal');
+
+	function openModal() {
+		modal.classList.add('show');
+		modal.classList.remove('hide');
+		body.classList.add('lock');
+	}
+
+	function closeModal() {
+		modal.classList.add('hide');
+		modal.classList.remove('show');
+		body.classList.remove('lock');
+	}
+
+	modalTrigger.forEach(trigger => {
+		trigger.addEventListener('click', openModal);
+	});
+
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal || e.target.getAttribute('data-close') == '') {
+			closeModal();
+		}
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.code === 'Escape' && modal.classList.contains('show')) {
+			closeModal();
+		}
+	});
+
+	const modalTimerId = setTimeout(openModal, 50000);
+
+	function showModalByScroll() {
+		if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+			openModal();
+			window.removeEventListener('scroll', showModalByScroll);
+		}
+	}
+
+	window.addEventListener('scroll', showModalByScroll);
+
+	//Use Class for Cards
+	class MenuCard {
+		constructor(src, alt, title, descr, price, parentSelector, ...classes) {
+			this.src = src;
+			this.alt = alt;
+			this.title = title;
+			this.descr = descr;
+			this.price = price;
+			this.classes = classes;
+			this.parent = document.querySelector(parentSelector);
+			this.transfer = 0.85;
+			this.changeToEUR();
+		}
+
+		changeToEUR() {
+			this.price = Math.trunc(this.price * this.transfer);
+		}
+
+		render() {
+			const element = document.createElement('div');
+
+			if (this.classes.length === 0) {
+				this.element = 'menu__column';
+				element.classList.add(this.element);
+			} else {
+				this.classes.forEach(className => element.classList.add(className));
+			}
+
+			element.innerHTML = `
+				<div class="menu__column-img">
+					<img src=${this.src} alt=${this.alt}>
+				</div>
+				<div class="menu__subtitle">${this.title}</div>
+				<div class="menu__column-descr">${this.descr}</div>
+				<div class="menu__column-divider"></div>
+				<div class="menu__column-price">
+					<div class="menu__column-cost">Цена:</div>
+					<div class="menu__column-total"><span>${this.price}</span> &euro;/день</div>
+				</div>
+			`;
+			this.parent.append(element);
+		}
+	}
+
+	new MenuCard(
+		"img/dishes/vegy.jpg",
+		"vegy",
+		'Меню "Фитнес"',
+		'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+		30,
+		'.menu .menu__row',
+		'menu__column',
+		'big'
+	).render();
+
+	new MenuCard(
+		"img/dishes/elite.jpg",
+		"elite",
+		'Меню "Премиум"',
+		'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+		76.90 ,
+		'.menu .menu__row',
+		'menu__column'
+	).render();
+
+	new MenuCard(
+		"img/dishes/post.jpg",
+		"post",
+		'Меню "Постное"',
+		'Меню "Постное" - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+		35.50,
+		'.menu .menu__row',
+		'menu__column'
+	).render();
+
+	//Forms
+	const forms = document.querySelectorAll('form');
+
+	const message = {
+		loading: 'img/form/spiner.svg',
+		success: 'Спасибо! Скоро мы с вами свяжемся',
+		failure: 'Что-то пошло не так...'
+	};
+
+	forms.forEach(item => {
+		postData(item);
+	});
+
+	function postData(form) {
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const statusMessage = document.createElement('img');
+			statusMessage.src = message.loading;
+			statusMessage.classList.add('spiner');
+			form.insertAdjacentElement('afterend', statusMessage);
+
+			const request = new XMLHttpRequest();
+			request.open('POST', 'server.php');
+
+			request.setRequestHeader('Content-type', 'application/json');
+			const formData = new FormData(form);
+
+			const object = {};
+			formData.forEach((value, key) => {
+				object[key] = value;
+			});
+
+			const json = JSON.stringify(object);
+
+			request.send(json);
+
+			request.addEventListener('load', () => {
+				if (request.status === 200) {
+					console.log(request.response);
+					showThanksModal(message.success);
+					form.reset();
+					statusMessage.remove();
+				} else {
+					showThanksModal(message.failure);
+					setTimeout(() => {
+						statusMessage.remove();
+					}, 2000);
+				}
+			});
+		});
+	}
+
+	function showThanksModal(message) {
+		const prevModalDialog = document.querySelector('.modal__dialog');
+		prevModalDialog.classList.remove('show');
+		prevModalDialog.classList.add('hide');
+		openModal();
+
+		const thanksModal = document.createElement('div');
+		thanksModal.classList.add('modal__dialog');
+		thanksModal.innerHTML = `
+			<div class="modal__content">
+				<div class="modal__close" data-close>×</div>
+				<div class="modal__title">${message}</div>
+			</div>
+		`;
+
+		document.querySelector('.modal').append(thanksModal);
+		setTimeout(() => {
+			thanksModal.remove();
+			prevModalDialog.classList.add('show');
+			prevModalDialog.classList.remove('hide');
+			closeModal();
+		}, 4000);
+	}
+
+});

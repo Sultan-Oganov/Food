@@ -244,33 +244,33 @@ window.addEventListener('DOMContentLoaded', () =>{
 			statusMessage.classList.add('spiner');
 			form.insertAdjacentElement('afterend', statusMessage);
 
-			const request = new XMLHttpRequest();
-			request.open('POST', 'server.php');
-
-			request.setRequestHeader('Content-type', 'application/json');
 			const formData = new FormData(form);
 
-			const object = {};
-			formData.forEach((value, key) => {
-				object[key] = value;
-			});
+			// const object = {};
+			// formData.forEach((value, key) => {
+			// 	object[key] = value;
+			// });
 
-			const json = JSON.stringify(object);
+			// const json = JSON.stringify(object);
 
-			request.send(json);
-
-			request.addEventListener('load', () => {
-				if (request.status === 200) {
-					console.log(request.response);
+			fetch('server.php', {
+				method: 'POST',
+				// headers: {
+				// 	'Content-type': 'application/json'
+				// },
+				body: formData
+			}).then(data => data.text())
+			.then(data => {
+					console.log(data);
 					showThanksModal(message.success);
-					form.reset();
 					statusMessage.remove();
-				} else {
+			}).catch(() => {
 					showThanksModal(message.failure);
 					setTimeout(() => {
 						statusMessage.remove();
 					}, 2000);
-				}
+			}).finally(() => {
+				form.reset();
 			});
 		});
 	}

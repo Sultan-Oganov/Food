@@ -1,11 +1,11 @@
 'use strict';
 
-window.addEventListener('DOMContentLoaded', () =>{
+window.addEventListener('DOMContentLoaded', () => {
 
 	//Menu
 	const burger = document.querySelector('.icon-menu'),
-			menu = document.querySelector('.header__nav'),
-			body = document.querySelector('body');
+		menu = document.querySelector('.header__nav'),
+		body = document.querySelector('body');
 
 	burger.addEventListener('click', () => {
 		burger.classList.toggle('active');
@@ -15,10 +15,10 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 	//Tabs
 	const tabContent = document.querySelectorAll('.tabcontent'),
-			tabsParent = document.querySelector('.tabheader__items'),
-			tabs = document.querySelectorAll('.tabheader__item');
+		tabsParent = document.querySelector('.tabheader__items'),
+		tabs = document.querySelectorAll('.tabheader__item');
 
-	function hideContent(){
+	function hideContent() {
 		tabContent.forEach(item => {
 			item.classList.add('hide');
 			item.classList.remove('show', 'fade');
@@ -57,10 +57,10 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 	function getTimeRemaining(endtime) {
 		const t = Date.parse(endtime) - Date.parse(new Date()),
-				days = Math.floor(t / (1000 * 60 * 60 * 24)),
-				hours = Math.floor((t / (1000 * 60 * 60) % 24)),
-				minutes = Math.floor((t / 1000 / 60) % 60),
-				seconds = Math.floor((t / 1000) % 60);
+			days = Math.floor(t / (1000 * 60 * 60 * 24)),
+			hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+			minutes = Math.floor((t / 1000 / 60) % 60),
+			seconds = Math.floor((t / 1000) % 60);
 
 		return {
 			total: t,
@@ -81,11 +81,11 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 	function setClock(selector, endtime) {
 		const timer = document.querySelector(selector),
-				days = timer.querySelector('#days'),
-				hours = timer.querySelector('#hours'),
-				minutes = timer.querySelector('#minutes'),
-				seconds = timer.querySelector('#seconds'),
-				timeInterval = setInterval(updateClock, 1000);
+			days = timer.querySelector('#days'),
+			hours = timer.querySelector('#hours'),
+			minutes = timer.querySelector('#minutes'),
+			seconds = timer.querySelector('#seconds'),
+			timeInterval = setInterval(updateClock, 1000);
 
 		updateClock();
 
@@ -106,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 	//Modal Window
 	const modalTrigger = document.querySelectorAll('[data-modal]'),
-			modal = document.querySelector('.modal');
+		modal = document.querySelector('.modal');
 
 	function openModal() {
 		modal.classList.add('show');
@@ -207,7 +207,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 		"elite",
 		'Меню "Премиум"',
 		'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-		76.90 ,
+		76.90,
 		'.menu .menu__row',
 		'menu__column'
 	).render();
@@ -258,19 +258,19 @@ window.addEventListener('DOMContentLoaded', () =>{
 				},
 				body: JSON.stringify(object)
 			})
-			.then(data => data.text())
-			.then(data => {
+				.then(data => data.text())
+				.then(data => {
 					console.log(data);
 					showThanksModal(message.success);
 					statusMessage.remove();
-			}).catch(() => {
+				}).catch(() => {
 					showThanksModal(message.failure);
 					setTimeout(() => {
 						statusMessage.remove();
 					}, 2000);
-			}).finally(() => {
-				form.reset();
-			});
+				}).finally(() => {
+					form.reset();
+				});
 		});
 	}
 
@@ -298,4 +298,53 @@ window.addEventListener('DOMContentLoaded', () =>{
 		}, 4000);
 	}
 
+	//Slider
+	const slides = document.querySelectorAll('.slider__slide'),
+		prev = document.querySelector('.slider__prev'),
+		next = document.querySelector('.slider__next'),
+		total = document.querySelector('#total'),
+		current = document.querySelector('#current');
+	let slideIndex = 1;
+
+	showSlides(slideIndex);
+
+	if (slides.length < 10) {
+		total.textContent = `0${slides.length}`;
+	} else {
+		total.textContent = slides.length;
+	}
+
+	function showSlides(n) {
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+
+		slides.forEach(item => {
+			item.classList.add('hide');
+			item.classList.remove('show');
+		});
+
+		slides[slideIndex - 1].classList.add('show');
+
+		if (slides.length < 10) {
+			current.textContent = `0${slideIndex}`;
+		} else {
+			current.textContent = slideIndex;
+		}
+	}
+
+	function plusSlides(n) {
+		showSlides(slideIndex += n);
+	}
+
+	prev.addEventListener('click', () => {
+		plusSlides(-1);
+	});
+	next.addEventListener('click', () => {
+		plusSlides(1);
+	});
 });

@@ -182,8 +182,9 @@
 						<div class="calculting__field">
 							<div class="calculting__subtitle">Ваш пол</div>
 							<div class="calculting__choose" id="gender">
-								<div class="calculting__choose-item calculting__choose-item_active">Женщина</div>
-								<div class="calculting__choose-item">Мужчина</div>
+								<div id="female" class="calculting__choose-item calculting__choose-item_active">Женщина
+								</div>
+								<div id="male" class="calculting__choose-item">Мужчина</div>
 							</div>
 							<div class="calculting__subtitle">Ваши параметры</div>
 							<div class="calculting__choose calculting__choose_medium">
@@ -196,11 +197,14 @@
 							</div>
 							<div class="calculting__subtitle">Выберите вашу физическая активность</div>
 							<div class="calculting__choose calculting__choose_big">
-								<div class="calculting__choose-item">Низкая активность</div>
-								<div class="calculting__choose-item calculting__choose-item_active">Невысокая активность
+								<div data-ratio="1.2" id="low" class="calculting__choose-item">Низкая активность</div>
+								<div data-ratio="1.375" id="small"
+									class="calculting__choose-item calculting__choose-item_active">Невысокая активность
 								</div>
-								<div class="calculting__choose-item">Умеренная активность</div>
-								<div class="calculting__choose-item">Высокая активность</div>
+								<div data-ratio="1.55" id="medium" class="calculting__choose-item">Умеренная активность
+								</div>
+								<div data-ratio="1.725" id="high" class="calculting__choose-item">Высокая активность
+								</div>
 							</div>
 							<div class="calculting__divider"></div>
 							<div class="calculting__total">

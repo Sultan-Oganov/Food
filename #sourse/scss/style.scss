@@ -6,7 +6,7 @@ $minwidth: 320px;
 //VARIABLES=====================================================================================================
 
 //CONNECTED FONTS===============================================================================================
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=cyrillic-ext');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=cyrillic-ext");
 //CONNECTED FONTS===============================================================================================
 
 //DEFAULT FONTS=================================================================================================
@@ -16,7 +16,7 @@ $fontfamily: "Roboto";
 //RESET=========================STYLES==========================================================================
 @import "null.scss";
 
-body{
+body {
 	&.lock {
 		overflow: hidden;
 	}
@@ -62,7 +62,7 @@ body{
 	width: 330px;
 	height: 1px;
 	margin: 0 auto;
-	background-color: rgba(0, 0, 0, .5);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .title {
 	font-size: 36px;
@@ -82,7 +82,7 @@ body{
 	box-shadow: 0 4px 15px #bdc7c0;
 	cursor: pointer;
 	border: 1px solid #bdc7c0;
-	@include anim(.3s, 0s);
+	@include anim(0.3s, 0s);
 	width: 228px;
 	height: 65px;
 	display: flex;
@@ -107,7 +107,7 @@ body{
 	position: absolute;
 	width: 1109px;
 	height: 780px;
-	background: rgba(255, 242, 0, .2);
+	background: rgba(255, 242, 0, 0.2);
 	z-index: -1;
 	top: 50px;
 }
